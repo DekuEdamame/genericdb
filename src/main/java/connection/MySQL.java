@@ -1,7 +1,7 @@
 package connection;
 
 /**
- * Created by Jn_Snw on 08.05.17.
+ * Created by JnSnw on 08.05.17.
  */
 
 import com.google.gson.Gson;
