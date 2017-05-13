@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 /**
- * Created by volkan on 13.05.17.
+ * Created by JnSnw on 13.05.17.
  */
 public class JsonSqlParser {
 

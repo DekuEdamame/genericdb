@@ -1,7 +1,7 @@
 package connection.impl;
 
 /**
- * Created by volkan on 12.05.17.
+ * Created by JnSnw on 12.05.17.
  */
 public interface ISqlConnection {
 

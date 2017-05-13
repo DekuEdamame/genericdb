@@ -4,7 +4,7 @@ import connection.impl.ISqlConnection;
 import connection.impl.mysql.runner.MySQL;
 
 /**
- * Created by volkan on 13.05.17.
+ * Created by JnSnw on 13.05.17.
  */
 public class MySqlExec implements ISqlConnection {
     public void CreateTable(String jsonContent) {
