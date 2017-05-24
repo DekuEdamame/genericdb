@@ -20,6 +20,7 @@ import java.util.Map;
 
 public class MySQL {
 
+    private JsonSqlParser jsonSqlParser;
     private Connection connection;
     private List<Map<String, Object>> listofMaps;
     private String dbUser;
@@ -28,26 +29,31 @@ public class MySQL {
     private String jdbcConnection;
 
 
-    public MySQL(String jsonContent) {
-        JsonSqlParser jsonSqlParser = new JsonSqlParser();
-        jsonSqlParser.setJsonContent(jsonContent);
-        this.dbUser = jsonSqlParser.getDbUser();
-        this.dbPassword = jsonSqlParser.getDbPassword();
-        this.sqlQuery = jsonSqlParser.getSqlQuery();
-        this.jdbcConnection = String.format("jdbc:mysql://%s/%s", jsonSqlParser.getDbNode(), jsonSqlParser.getDbName());
+
+
+    public MySQL(String jsonDbInfo) {
+
+        jsonSqlParser = new JsonSqlParser();
+        jsonSqlParser.setDbInfo(jsonDbInfo);
+
+        dbUser = jsonSqlParser.getDbUser();
+        dbPassword = jsonSqlParser.getDbPassword();
+        jdbcConnection = String.format("jdbc:mysql://%s/%s", jsonSqlParser.getDbNode(), jsonSqlParser.getDbName());
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            this.connection = DriverManager.getConnection(jdbcConnection, dbUser, dbPassword);
+            connection = DriverManager.getConnection(jdbcConnection, dbUser, dbPassword);
         } catch (Exception e) {
             System.out.println("Error in establishing the connection " + e);
         }
     }
 
 
-    public void createTable() {
+    public void createTable(String jsonContent) {
         try {
-            Statement stmt = this.connection.createStatement();
-            stmt.executeUpdate(this.sqlQuery);
+            jsonSqlParser.setJsonContent(jsonContent);
+            sqlQuery = jsonSqlParser.getSqlQuery();
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate(sqlQuery);
         } catch (Exception e) {
             System.out.println("Error creating Table " + e);
         }
@@ -56,7 +62,7 @@ public class MySQL {
     public String selectTable() {
         try {
             QueryRunner queryRunner = new QueryRunner();
-            this.listofMaps = queryRunner.query(this.connection, this.sqlQuery, new MapListHandler());
+            listofMaps = queryRunner.query(connection, sqlQuery, new MapListHandler());
         } catch (SQLException e) {
             throw new RuntimeException("Couldn't query the database.", e);
         }
@@ -65,7 +71,7 @@ public class MySQL {
 
     public void closeConnection() {
         try {
-            DbUtils.closeQuietly(this.connection);
+            DbUtils.closeQuietly(connection);
         } catch (Exception e) {
             System.out.println("Error in closing connection " + e);
         }

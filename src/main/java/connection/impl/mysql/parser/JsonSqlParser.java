@@ -11,6 +11,7 @@ public class JsonSqlParser {
 
 
     private enum TableAction{ CREATE, SELECT, INSERT, DELETE }
+    private String jsonDbInfo;
     private String jsonContent;
     private String dbNode;
     private String dbName;
@@ -22,12 +23,9 @@ public class JsonSqlParser {
     private String sqlQuery = "";
 
 
-    private void initialSqlProperties(){
-
-        JSONObject jsonObject = new JSONObject(this.jsonContent);
+    private void initialDbProperties(){
+        JSONObject jsonObject = new JSONObject(this.jsonDbInfo);
         JSONObject dbInfo = jsonObject.getJSONObject("dbTarget");
-        JSONObject tableInfo = dbInfo.getJSONObject("dbTable");
-        JSONObject tableColumn = tableInfo.getJSONObject("tableColumn");
 
         this.dbNode = dbInfo
                 .getString("dbNode");
@@ -37,6 +35,14 @@ public class JsonSqlParser {
                 .getString("dbUser");
         this.dbPassword = dbInfo
                 .getString("dbPassword");
+
+    }
+
+    private void initialSqlProperties(){
+
+        JSONObject jsonObject = new JSONObject(this.jsonContent);
+        JSONObject tableInfo = jsonObject.getJSONObject("dbTable");
+        JSONObject tableColumn = tableInfo.getJSONObject("tableColumn");
 
         this.tableName = tableInfo
                 .getString("tableName");
@@ -79,6 +85,11 @@ public class JsonSqlParser {
                 return;
             }
 
+    }
+
+    public void setDbInfo(String jsonDbInfo) {
+        this.jsonDbInfo = jsonDbInfo;
+        initialDbProperties();
     }
 
     public void setJsonContent(String jsonContent) {
