@@ -1,0 +1,19 @@
+{
+  "dbTarget": {
+    "dbNode"    : "localhost",
+    "dbName"    : "userinfo",
+    "dbUser"    : "root",
+    "dbPassword": "admin",
+    "dbTable": {
+      "tableName"   : "Person",
+      "tableAction" : "Select",
+      "tableColumn": {
+        "PersonID": {
+          "value"    : "1"
+        }
+      }
+
+    }
+  }
+}
+

@@ -5,11 +5,11 @@ package connection.impl;
  */
 public interface ISqlConnection {
 
-    public void CreateTable(String jsonContent);
+    public void createTable(String jsonContent);
 
-    public void SelectTable(String jsonContent);
+    public void selectTable(String jsonContent);
 
-    public void InsertTable(String jsonContent);
+    public void insertTable(String jsonContent);
 
     public void DeleteTable(String jsonContent);
 

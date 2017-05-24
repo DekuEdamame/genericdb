@@ -20,15 +20,15 @@ import java.util.Map;
 
 public class MySQL {
 
-    Connection connection;
-    List<Map<String, Object>> listofMaps;
-    String dbUser;
-    String dbPassword;
-    String sqlQuery;
-    String jdbcConnection;
+    private Connection connection;
+    private List<Map<String, Object>> listofMaps;
+    private String dbUser;
+    private String dbPassword;
+    private String sqlQuery;
+    private String jdbcConnection;
 
 
-    public void setConnection(String jsonContent) {
+    public MySQL(String jsonContent) {
         JsonSqlParser jsonSqlParser = new JsonSqlParser();
         jsonSqlParser.setJsonContent(jsonContent);
         this.dbUser = jsonSqlParser.getDbUser();
@@ -43,27 +43,32 @@ public class MySQL {
         }
     }
 
-    public void CreateTable() {
+
+    public void createTable() {
         try {
             Statement stmt = this.connection.createStatement();
             stmt.executeUpdate(this.sqlQuery);
         } catch (Exception e) {
             System.out.println("Error creating Table " + e);
-        } finally {
-            DbUtils.closeQuietly(connection);
         }
     }
 
-    public String SelectTable() {
+    public String selectTable() {
         try {
             QueryRunner queryRunner = new QueryRunner();
             this.listofMaps = queryRunner.query(this.connection, this.sqlQuery, new MapListHandler());
         } catch (SQLException e) {
             throw new RuntimeException("Couldn't query the database.", e);
-        } finally {
-            DbUtils.closeQuietly(connection);
         }
         return new Gson().toJson(listofMaps);
+    }
+
+    public void closeConnection() {
+        try {
+            DbUtils.closeQuietly(this.connection);
+        } catch (Exception e) {
+            System.out.println("Error in closing connection " + e);
+        }
     }
 
 }

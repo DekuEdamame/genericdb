@@ -7,19 +7,18 @@ import connection.impl.mysql.runner.MySQL;
  * Created by JnSnw on 13.05.17.
  */
 public class MySqlExec implements ISqlConnection {
-    public void CreateTable(String jsonContent) {
-        MySQL mySQL = new MySQL();
-        mySQL.setConnection(jsonContent);
-        mySQL.CreateTable();
+    public void createTable(String jsonContent) {
+        MySQL mySQL = new MySQL(jsonContent);
+        mySQL.createTable();
+        mySQL.closeConnection();
     }
 
-    public void SelectTable(String jsonContent) {
-        MySQL mySQL = new MySQL();
-        mySQL.setConnection(jsonContent);
-        mySQL.SelectTable();
+    public void selectTable(String jsonContent) {
+        MySQL mySQL = new MySQL(jsonContent);
+        mySQL.selectTable();
     }
 
-    public void InsertTable(String jsonContent) {
+    public void insertTable(String jsonContent) {
 
     }
 

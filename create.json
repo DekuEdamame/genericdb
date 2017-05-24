@@ -1,0 +1,34 @@
+{
+  "dbTarget": {
+    "dbNode"    : "localhost",
+    "dbName"    : "userinfo",
+    "dbUser"    : "root",
+    "dbPassword": "admin",
+    "dbTable": {
+      "tableName"   : "testtable",
+      "tableAction" : "CREATE",
+      "tableColumn": {
+        "PersonID": {
+          "dataType"    : "INT",
+          "primaryKey"  : true
+        },
+        "FirstName": {
+          "dataType"    : "VARCHAR(255)"
+        },
+        "LastName": {
+          "dataType"    : "VARCHAR(255)"
+        },
+        "Address": {
+          "dataType"    : "VARCHAR(255)"
+        },
+        "PostCode": {
+          "dataType"    : "INT"
+        },
+        "City": {
+          "dataType"    : "VARCHAR(255)"
+        }
+      }
+
+    }
+  }
+}

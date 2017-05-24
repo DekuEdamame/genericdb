@@ -22,7 +22,7 @@ public class JsonSqlParser {
     private String sqlQuery = "";
 
 
-    private void InitialSqlProperties(){
+    private void initialSqlProperties(){
 
         JSONObject jsonObject = new JSONObject(this.jsonContent);
         JSONObject dbInfo = jsonObject.getJSONObject("dbTarget");
@@ -83,7 +83,7 @@ public class JsonSqlParser {
 
     public void setJsonContent(String jsonContent) {
         this.jsonContent = jsonContent;
-        InitialSqlProperties();
+        initialSqlProperties();
     }
 
     public String getDbNode() {
