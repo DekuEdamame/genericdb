@@ -9,12 +9,17 @@ import connection.impl.mysql.MySqlExec;
 public class GetQuery {
 
     public static void main(String[] args) {
-        String jsonCreateString ="{\n"+
+        String jsonDbInfo ="{\n"+
                 "  \"dbTarget\": {\n"+
                 "    \"dbNode\"    : \"localhost\",\n"+
                 "    \"dbName\"    : \"userinfo\",\n"+
                 "    \"dbUser\"    : \"root\",\n"+
                 "    \"dbPassword\": \"admin\",\n"+
+                "      }\n"+
+                "}";
+
+
+        String jsonCreateString ="{\n"+
                 "    \"dbTable\": {\n"+
                 "      \"tableName\"   : \"testtable\",\n"+
                 "      \"tableAction\" : \"CREATE\",\n"+
@@ -38,13 +43,11 @@ public class GetQuery {
                 "        \"City\": {\n"+
                 "          \"dataType\"    : \"VARCHAR(255)\"\n"+
                 "        }\n"+
-                "      }\n"+
-                "\n"+
                 "    }\n"+
                 "  }\n"+
                 "}";
 
-        MySqlExec mySqlExec = new MySqlExec();
+        MySqlExec mySqlExec = new MySqlExec(jsonDbInfo);
         mySqlExec.createTable(jsonCreateString);
 
 

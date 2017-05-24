@@ -7,9 +7,14 @@ import connection.impl.mysql.runner.MySQL;
  * Created by JnSnw on 13.05.17.
  */
 public class MySqlExec implements ISqlConnection {
+
+    private MySQL mySQL;
+
+    public MySqlExec (String jsonDbInfo) {
+        mySQL = new MySQL(jsonDbInfo);
+    }
     public void createTable(String jsonContent) {
-        MySQL mySQL = new MySQL(jsonContent);
-        mySQL.createTable();
+        mySQL.createTable(jsonContent);
         mySQL.closeConnection();
     }
 
