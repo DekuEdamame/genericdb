@@ -59,8 +59,10 @@ public class MySQL {
         }
     }
 
-    public String selectTable() {
+    public String selectTable(String jsonContent) {
         try {
+            jsonSqlParser.setJsonContent(jsonContent);
+            sqlQuery = jsonSqlParser.getSqlQuery();
             QueryRunner queryRunner = new QueryRunner();
             listofMaps = queryRunner.query(connection, sqlQuery, new MapListHandler());
         } catch (SQLException e) {

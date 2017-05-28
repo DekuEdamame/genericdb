@@ -47,8 +47,23 @@ public class GetQuery {
                 "  }\n"+
                 "}";
 
+        String jsonSelectString ="{\n"+
+                "    \"dbTable\": {\n"+
+                "      \"tableName\"   : \"Person\",\n"+
+                "      \"tableAction\" : \"SELECT\",\n"+
+                "      \"tableColumn\": {\n"+
+                "        \"columnName\": {\n"+
+                "          \"value\"    : \"PersonID\",\n"+
+                "        },\n"+
+                "        \"selectValue\": {\n"+
+                "          \"value\"    : \"1\",\n"+
+                "        },\n"+
+                "    }\n"+
+                "  }\n"+
+                "}";
+
         MySqlExec mySqlExec = new MySqlExec(jsonDbInfo);
-        mySqlExec.createTable(jsonCreateString);
+        System.out.println(mySqlExec.selectTable(jsonSelectString));
 
 
 
